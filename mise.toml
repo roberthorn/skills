@@ -1,0 +1,5 @@
+[tasks.install]
+run = """
+rm -rf ~/.claude/skills
+ln -s $MISE_PROJECT_ROOT/skills ~/.claude/skills
+"""
