@@ -1,5 +1,7 @@
 [tasks.install]
 run = """
 rm -rf ~/.claude/skills
+rm -rf ~/.pi/agent/skills
 ln -s $MISE_PROJECT_ROOT/skills ~/.claude/skills
+ln -s $MISE_PROJECT_ROOT/skills ~/.pi/agent/skills
 """
