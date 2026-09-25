@@ -1,0 +1,28 @@
+filters:
+  and:
+    - 'file.inFolder("<ISSUES_FOLDER>")'
+    - 'file.ext == "md"'
+    - 'file.hasTag("wayfinder")'
+formulas:
+  open_blockers: 'if(blocked_by, list(blocked_by).filter(value.asFile().properties.status != "resolved" && value.asFile().properties.status != "out-of-scope").length, 0)'
+properties:
+  formula.open_blockers:
+    displayName: "Open blockers"
+views:
+  - type: table
+    name: Frontier
+    filters:
+      and:
+        - 'status == "open"'
+        - 'formula.open_blockers == 0'
+    order:
+      - file.name
+      - tags
+  - type: table
+    name: All
+    order:
+      - file.name
+      - tags
+      - status
+      - assignee
+      - formula.open_blockers
