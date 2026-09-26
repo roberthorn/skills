@@ -1,7 +1,13 @@
 [tasks.install]
+description = "Symlink each skill dir flat into agent skill dirs"
 run = """
-rm -rf ~/.claude/skills
-rm -rf ~/.pi/agent/skills
-ln -s $MISE_PROJECT_ROOT/skills ~/.claude/skills
-ln -s $MISE_PROJECT_ROOT/skills ~/.pi/agent/skills
+set -e
+for target in ~/.claude/skills ~/.pi/agent/skills; do
+  rm -rf "$target"
+  mkdir -p "$target"
+  find "$MISE_PROJECT_ROOT/skills" -name SKILL.md | while read -r f; do
+    d=$(dirname "$f")
+    ln -s "$d" "$target/$(basename "$d")"
+  done
+done
 """
