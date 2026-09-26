@@ -1,3 +1,10 @@
+[tools]
+shellcheck = "latest"
+
+[tasks.lint]
+description = "Run shellcheck on all scripts"
+run = "shellcheck \"$MISE_PROJECT_ROOT\"/script/*.sh"
+
 [tasks.install]
 description = "Symlink each skill dir flat into agent skill dirs"
 run = """
