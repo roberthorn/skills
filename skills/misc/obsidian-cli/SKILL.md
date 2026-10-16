@@ -5,6 +5,22 @@ description: Interact with Obsidian vaults using the Obsidian CLI to read, creat
 
 # Obsidian CLI
 
+## Inside the nono sandbox: skip the CLI
+
+The CLI is broken under nono. Detect the sandbox with `test -n "$NONO_CAP_FILE"` (set only inside nono). If set, **never run `obsidian`**; read and write the vault files directly with the read/write/edit tools:
+
+- **Vault path**: `$OBSIDIAN_VAULT_PATH`. If unset, ask the user for the absolute path; don't guess or run `obsidian vault info=path`.
+- Paths given as vault-relative (`00 - Agents/...`) resolve to `<vault path>/<path>`.
+- Create notes with write (parent folders are created automatically); include frontmatter in the content.
+- `append` / `property:set` / `property:read`: read the file, then edit the frontmatter or body with exact-match edits.
+- `read`: read the file. `files` / `search`: `find` / `rg` under the vault path.
+- No `base:query`, backlinks, or tags: read the notes and filter frontmatter yourself.
+- `file=<name>` wikilink resolution: `find` the vault for `<name>.md`.
+
+Outside the sandbox, use the CLI below.
+
+# CLI usage
+
 Use the `obsidian` CLI to interact with a running Obsidian instance. Requires Obsidian to be open.
 
 ## Command reference

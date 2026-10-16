@@ -7,6 +7,8 @@ description: Issue tracker backed by an Obsidian vault, where issues, specs, and
 
 Issues and specs live as notes in an Obsidian vault, driven through the `obsidian` CLI (Obsidian must be running). Call the Skill tool with "obsidian-cli" for CLI syntax.
 
+**In the nono sandbox** (`test -n "$NONO_CAP_FILE"`) the CLI is broken: don't call `obsidian`. Every `obsidian ...` command below has a direct-file equivalent per the "obsidian-cli" skill (vault path from `$OBSIDIAN_VAULT_PATH`; write/edit/read tools on `<vault path>/<path>`). For the frontier query, read the `Issues/` notes and filter frontmatter (`status: open`, every `blocked_by` ticket `resolved`/`out-of-scope`, empty `assignee`); lowest `NN` wins.
+
 ## Where things live
 
 - **Vault**: the most recently focused one. Its absolute path is `obsidian vault info=path`.
